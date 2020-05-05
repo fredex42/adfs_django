@@ -16,7 +16,7 @@ Including another URLconf
 import django_saml2_auth.views
 from django.conf.urls import url, include
 from django.contrib import admin
-from .views import IndexPageView
+from .views import IndexPageView, LogoutView
 urlpatterns = [
     # These are the SAML2 related URLs. You can change "^saml2_auth/" regex to
     # any path you want, like "^sso_auth/", "^sso_login/", etc. (required)
@@ -33,6 +33,7 @@ urlpatterns = [
     url(r'^admin/login/$', django_saml2_auth.views.signin),
 
     url(r'^admin/', admin.site.urls),
+    url(r'^logout$', LogoutView.as_view()),
     url(r'^$', IndexPageView.as_view())
 
 ]
