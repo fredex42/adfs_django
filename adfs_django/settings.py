@@ -55,7 +55,7 @@ ROOT_URLCONF = 'adfs_django.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ["adfs_django/templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
