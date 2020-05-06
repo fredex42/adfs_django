@@ -2,3 +2,5 @@ venv/
 *.sqlite3
 FederationMetadata.xml
 node_modules/
+*.tar
+.idea/
