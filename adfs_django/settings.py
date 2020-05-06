@@ -108,6 +108,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = ["./static/"]
+STATIC_ROOT = '/opt/adfs_django/static'
 
 from adfs_django.config import *
 
