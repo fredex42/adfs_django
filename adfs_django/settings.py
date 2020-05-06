@@ -119,6 +119,19 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = ["./static/"]
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+    ),
+}
+
 
 SAML2_AUTH = {
     # Metadata is required, choose either remote url or local file path
@@ -151,7 +164,7 @@ SAML2_AUTH = {
     'ENTITY_ID': 'https://adfs-test.local.dev-gutools.co.uk/saml2_auth/acs/', # Populates the Issuer element in authn request
     'NAME_ID_FORMAT': "None",  # Sets the Format property of authn NameIDPolicy element
     'USE_JWT': True, # Set this to True if you are running a Single Page Application (SPA) with Django Rest Framework (DRF), and are using JWT authentication to authorize client users
-    'FRONTEND_URL': 'https://djfrontend.local.dev-gutools.co.uk', # Redirect URL for the client if you are using JWT auth with DRF.
+    'FRONTEND_URL': 'https://adfs-test.local.dev-gutools.co.uk/logged_in', # Redirect URL for the client if you are using JWT auth with DRF.
     #If USE_JWT is True then post-auth a GET request is made to FRONTEND_URL with the JWT as the token= query parameter and the SSO index as uid= parameter
 }
 

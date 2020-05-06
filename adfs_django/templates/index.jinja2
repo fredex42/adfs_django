@@ -1,11 +1,14 @@
+{% load staticfiles %}
 <html>
 <head><title>adfs-test django</title></head>
 <body>
-<h1>adfs-test</h1>
-<p>root page</p>
-<ul>
-    <li><a href="/admin">Admin</a></li>
-    <li><a href="/logout">Log out</a></li>
-</ul>
+{# <h1>adfs-test</h1> #}
+{#<p>root page</p>#}
+{#<ul>#}
+{#    <li><a href="/admin">Admin</a></li>#}
+{#    <li><a href="/logout">Log out</a></li>#}
+{#</ul>#}
+<div id="app"></div>
+<script src="{% static "js/bundle.js" %}"></script>
 </body>
 </html>
