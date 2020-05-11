@@ -25,12 +25,10 @@ SECRET_KEY = 'ftd(j*7e+7g0s6gz+lu^q(9g71fw#sa6c(l+=t6-3n@rm^qd!1'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-
-
 # Application definition
 
 INSTALLED_APPS = [
-    'django_saml2_auth',
+    'oauth2_provider',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -40,6 +38,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'oauth2_provider.middleware.OAuth2TokenMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -47,6 +46,12 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
+
+AUTHENTICATION_BACKENDS = [
+    'oauth2_provider.backends.OAuth2Backend',
+    # Uncomment following if you want to access the admin
+    #'django.contrib.auth.backends.ModelBackend'
 ]
 
 ROOT_URLCONF = 'adfs_django.urls'

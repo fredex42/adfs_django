@@ -6,6 +6,7 @@ from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 from rest_framework.renderers import JSONRenderer
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
+from oauth2_provider.views.generic import ProtectedResourceView
 
 
 class IndexPageView(LoginRequiredMixin, TemplateView):
@@ -20,7 +21,7 @@ class LogoutView(TemplateView):
         return super(LogoutView, self).get(request,*args,**kwargs)
 
 
-class RestView(APIView):
+class RestView(ProtectedResourceView, APIView):
     authentication_classes = (JSONWebTokenAuthentication, )
     renderer_classes = (JSONRenderer, )
     permission_classes = (IsAuthenticated,)
