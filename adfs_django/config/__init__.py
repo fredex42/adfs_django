@@ -14,45 +14,23 @@ REST_FRAMEWORK = {
     ),
 }
 
-if os.path.isdir("/data"):
-    fedpath = "/data"
-else:
-    fedpath = BASE_DIR
-
-SAML2_AUTH = {
-    # Metadata is required, choose either remote url or local file path
-    #'METADATA_AUTO_CONF_URL': '[The auto(dynamic) metadata configuration URL of SAML2]',
-    'METADATA_LOCAL_FILE_PATH': os.path.join(fedpath, "FederationMetadata.xml"),
-
-    # Optional settings below
-    'DEFAULT_NEXT_URL': '/admin',  # Custom target redirect URL after the user get logged in. Default to /admin if not set.
-    # This setting will be overwritten if you have parameter ?next= specificed in the login URL.
-    'CREATE_USER': 'TRUE', # Create a new Django user when a new user logs in. Defaults to True.
-    'NEW_USER_PROFILE': {
-        'USER_GROUPS': [],  # The default group name when a new user logs in
-        'ACTIVE_STATUS': True,  # The default active status for new users
-        'STAFF_STATUS': True,  # The staff status for new users
-        'SUPERUSER_STATUS': False,  # The superuser status for new users
-    },
-    'ATTRIBUTES_MAP': {  # Change Email/UserName/FirstName/LastName to corresponding SAML2 userprofile attributes.
-        'email': 'email',
-        'username': 'username',
-        'first_name': 'first_name',
-        'last_name': 'family_name',
-        'job_title': 'job_title',
-        'department': 'location',
-    },
-    # 'TRIGGER': {
-    #     'CREATE_USER': 'path.to.your.new.user.hook.method',
-    #     'BEFORE_LOGIN': 'path.to.your.login.hook.method',
-    # },
-    'ASSERTION_URL': 'https://adfs-test.local.dev-gutools.co.uk', # Custom URL to validate incoming SAML requests against
-    'ENTITY_ID': 'https://adfs-test.local.dev-gutools.co.uk/saml2_auth/acs/', # Populates the Issuer element in authn request
-    'NAME_ID_FORMAT': "None",  # Sets the Format property of authn NameIDPolicy element
-    'USE_JWT': True, # Set this to True if you are running a Single Page Application (SPA) with Django Rest Framework (DRF), and are using JWT authentication to authorize client users
-    'FRONTEND_URL': 'https://adfs-test.local.dev-gutools.co.uk/logged_in', # Redirect URL for the client if you are using JWT auth with DRF.
-    #If USE_JWT is True then post-auth a GET request is made to FRONTEND_URL with the JWT as the token= query parameter and the SSO index as uid= parameter
+# checkout the documentation for more settings
+AUTH_ADFS = {
+    "SERVER": "adfsdev.theguardian.com",
+    "CLIENT_ID": "491711a1-e46b-4e8b-86ce-b0d4b1edc36a",
+    "RELYING_PARTY_ID": "https://adfs-test.local.dev-gutools.co.uk/callback",
+    # Make sure to read the documentation about the AUDIENCE setting
+    # when you configured the identifier as a URL!
+    "AUDIENCE": "https://adfs-test.local.dev-gutools.co.uk/callback",
+    #"CA_BUNDLE": "mycert_chain.pem",
+    "CLAIM_MAPPING": {"first_name": "given_name",
+                      "last_name": "family_name",
+                      "email": "email"},
 }
+
+# Configure django to redirect users to the right URL for login
+LOGIN_URL = "django_auth_adfs:login"
+LOGIN_REDIRECT_URL = "/"
 
 ALLOWED_HOSTS = ["adfs-test.local.dev-gutools.co.uk"]
 
