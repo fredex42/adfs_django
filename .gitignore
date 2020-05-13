@@ -4,3 +4,4 @@ FederationMetadata.xml
 node_modules/
 *.tar
 .idea/
+*.pem

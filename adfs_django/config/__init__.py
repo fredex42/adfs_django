@@ -23,11 +23,17 @@ AUTH_ADFS = {
     # when you configured the identifier as a URL!
     "AUDIENCE": "https://adfs-test.local.dev-gutools.co.uk/callback",
     #"CA_BUNDLE": "mycert_chain.pem",
-    "CLAIM_MAPPING": {"first_name": "given_name",
+    "CLAIM_MAPPING": {"first_name": "first_name",
                       "last_name": "family_name",
-                      "email": "email"},
+                      #'job_title': 'job_title',
+                      "email": "email",
+                      #'department': 'location',
+                      },
+    "USERNAME_CLAIM": "username"
 }
 
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+# SECURE_SSL_REDIRECT = True
 # Configure django to redirect users to the right URL for login
 LOGIN_URL = "django_auth_adfs:login"
 LOGIN_REDIRECT_URL = "/"
