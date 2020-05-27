@@ -16,7 +16,7 @@ REST_FRAMEWORK = {
 
 # checkout the documentation for more settings
 AUTH_ADFS = {
-    "SERVER": "adfsdev.theguardian.com",
+    "SERVER": "adfs-redir.local.dev-gutools.co.uk",
     "CLIENT_ID": "491711a1-e46b-4e8b-86ce-b0d4b1edc36a",
     "RELYING_PARTY_ID": "https://adfs-test.local.dev-gutools.co.uk/callback",
     # Make sure to read the documentation about the AUDIENCE setting
