@@ -15,10 +15,11 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-from .views import IndexPageView, LogoutView, RestView,PointlessView
+from .views import IndexPageView, LogoutView, RestView,PointlessView, SetLoginCookie
 
 urlpatterns = [
     url(r'accounts/login', PointlessView.as_view()),
+    url(r'^api/tokenlogin$', SetLoginCookie.as_view()),
     url(r'^admin/', admin.site.urls),
     url(r'^logout$', LogoutView.as_view()),
     url(r'^api/test$', RestView.as_view()),
